@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<script>
+(function(){
+  try {
+    var pref = localStorage.getItem('clockout-lang');
+    if (pref === 'en') { location.replace('../'); }
+  } catch(e) {}
+})();
+</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ClockOut — Ukonči pracovní den vědomě</title>
+<meta name="description" content="Tříminutový rituál na konec pracovního dne, aby nezasahoval do večera. Zdarma, soukromé, bez reklam.">
+<link rel="canonical" href="https://ruzickaond.github.io/clockout-app-web/cs/">
+<link rel="alternate" hreflang="en" href="https://ruzickaond.github.io/clockout-app-web/">
+<link rel="alternate" hreflang="cs" href="https://ruzickaond.github.io/clockout-app-web/cs/">
+<link rel="alternate" hreflang="x-default" href="https://ruzickaond.github.io/clockout-app-web/">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="icon" href="../favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<link rel="manifest" href="../site.webmanifest">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="ClockOut — Ukonči pracovní den vědomě">
+<meta property="og:description" content="Tříminutový rituál na konec pracovního dne, aby nezasahoval do večera. Zdarma, soukromé, bez reklam.">
+<meta property="og:url" content="https://ruzickaond.github.io/clockout-app-web/cs/">
+<meta property="og:image" content="https://play-lh.googleusercontent.com/MNSv7ECEiLILvRtvFfzArZCT3wae8mAfHuKnqLDiFg-m8raJEzzhiiYgs5hn_9fF_Y8qldCKCaHu7s63d5mgTw=w512-h512">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ClockOut — Ukonči pracovní den vědomě">
+<meta name="twitter:description" content="Tříminutový rituál na konec pracovního dne, aby nezasahoval do večera.">
+<meta name="twitter:image" content="https://play-lh.googleusercontent.com/MNSv7ECEiLILvRtvFfzArZCT3wae8mAfHuKnqLDiFg-m8raJEzzhiiYgs5hn_9fF_Y8qldCKCaHu7s63d5mgTw=w512-h512">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "ClockOut",
+  "operatingSystem": "ANDROID",
+  "applicationCategory": "LifestyleApplication",
+  "url": "https://ruzickaond.github.io/clockout-app-web/cs/",
+  "description": "Tříminutový rituál na konec pracovního dne, aby nezasahoval do večera.",
+  "inLanguage": "cs",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "installUrl": "https://play.google.com/store/apps/details?id=org.clockout&hl=cs"
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,480;9..144,600&family=Work+Sans:wght@400;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,480;9..144,600&family=Work+Sans:wght@400;600&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,480;9..144,600&family=Work+Sans:wght@400;600&display=swap"></noscript>
+<style>
+  :root{
+    --bg:#12162b;
+    --bg-alt:#191f3d;
+    --ink:#f1ecdd;
+    --muted:#93a1c9;
+    --muted-dim:#5c6488;
+    --lamp:#f0a83c;
+    --lamp-soft:#7a5a2a;
+    --line: rgba(241,236,221,0.12);
+    --serif: 'Fraunces', serif;
+    --sans: 'Work Sans', sans-serif;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:var(--sans);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  a{color:inherit;}
+
+  .wrap{
+    max-width:760px;
+    margin:0 auto;
+    padding:0 24px;
+  }
+
+  /* ---------- Site nav ---------- */
+  .site-nav{
+    position:sticky;
+    top:0;
+    z-index:20;
+    background:rgba(18,22,43,0.78);
+    backdrop-filter:blur(10px);
+    -webkit-backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+
+  .site-nav .wrap{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    height:64px;
+  }
+
+  .site-nav .mark{
+    font-family:var(--serif);
+    font-size:19px;
+    font-weight:600;
+    letter-spacing:-0.01em;
+    color:var(--ink);
+  }
+
+  .site-nav ul{
+    list-style:none;
+    display:flex;
+    gap:28px;
+    margin:0;
+    padding:0;
+  }
+
+  .site-nav a{
+    font-size:14px;
+    color:var(--muted);
+    text-decoration:none;
+    transition:color 0.2s ease;
+    -webkit-tap-highlight-color:transparent;
+  }
+  .site-nav a,
+  .site-nav a:visited,
+  .site-nav a:active{ color:var(--muted); }
+  .site-nav a:hover{ color:var(--ink); }
+  .site-nav a:focus-visible{
+    color:var(--ink);
+    outline:2px solid var(--lamp);
+    outline-offset:4px;
+    border-radius:2px;
+  }
+
+  .lang-switch{
+    font-size:13px !important;
+    padding:5px 10px;
+    border:1px solid var(--line);
+    border-radius:999px;
+  }
+
+  @media (max-width:560px){
+    .site-nav ul{ gap:18px; }
+  }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    padding:80px 0 64px;
+    text-align:center;
+  }
+
+  section[id]{
+    scroll-margin-top:64px;
+  }
+
+  .lamp-scene{
+    width:96px;
+    height:96px;
+    margin:0 auto 40px;
+    position:relative;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+
+  .halo{
+    position:absolute;
+    inset:0;
+    border-radius:50%;
+    background:radial-gradient(circle, rgba(240,168,60,0.55) 0%, rgba(240,168,60,0.18) 45%, rgba(240,168,60,0) 72%);
+    opacity:1;
+    animation: halo-pulse 2.4s ease-in-out infinite;
+    transition:opacity 0.7s ease;
+  }
+
+  @keyframes halo-pulse{
+    0%, 100%{ transform:scale(0.92); }
+    50%{ transform:scale(1.1); }
+  }
+
+  .bulb-icon{
+    position:relative;
+    width:52px;
+    height:52px;
+    overflow:visible;
+  }
+
+  .bulb-icon path{
+    fill:var(--lamp);
+    filter:drop-shadow(0 0 10px rgba(240,168,60,0.55));
+    transition:fill 0.7s ease, filter 0.7s ease;
+  }
+
+  .lamp-scene.is-off .halo{
+    opacity:0;
+    animation-play-state:paused;
+  }
+
+  .lamp-scene.is-off .bulb-icon path{
+    fill:var(--muted-dim);
+    filter:none;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .halo{ animation:none; }
+  }
+
+  h1{
+    font-family:var(--serif);
+    font-weight:600;
+    font-optical-sizing:auto;
+    font-size:clamp(38px, 7.5vw, 62px);
+    line-height:1.08;
+    margin:0 0 22px;
+    letter-spacing:-0.02em;
+  }
+
+  .lede{
+    font-size:18px;
+    color:var(--muted);
+    max-width:480px;
+    margin:0 auto 40px;
+  }
+
+  .cta{
+    display:inline-block;
+    text-decoration:none;
+  }
+
+  .cta-badge{
+    height:56px;
+    width:auto;
+    display:block;
+  }
+
+  .cta-fallback{
+    display:none;
+    align-items:center;
+    gap:10px;
+    padding:15px 30px;
+    border-radius:999px;
+    background:var(--lamp);
+    color:var(--bg);
+    font-family:var(--sans);
+    font-weight:600;
+    font-size:15px;
+    transition:transform 0.2s ease, filter 0.2s ease;
+  }
+
+  .cta:hover .cta-fallback{
+    filter:brightness(1.07);
+    transform:translateY(-1px);
+  }
+
+  .cta-fallback svg{
+    width:18px;
+    height:18px;
+    flex:0 0 auto;
+  }
+
+  /* ---------- Section shared ---------- */
+  section{
+    padding:64px 0;
+    border-top:1px solid var(--line);
+  }
+
+  h2{
+    font-family:var(--serif);
+    font-weight:480;
+    font-size:28px;
+    margin:0 0 36px;
+    max-width:420px;
+  }
+
+  /* ---------- Ritual ---------- */
+  .ritual{
+    display:flex;
+    flex-direction:column;
+    gap:28px;
+  }
+
+  .step{
+    display:grid;
+    grid-template-columns:40px 1fr;
+    gap:18px;
+    align-items:start;
+  }
+
+  .step .num{
+    font-family:var(--serif);
+    font-size:22px;
+    color:var(--lamp);
+    line-height:1.4;
+  }
+
+  .step h3{
+    font-family:var(--sans);
+    font-weight:600;
+    font-size:17px;
+    margin:0 0 6px;
+  }
+
+  .step p{
+    margin:0;
+    color:var(--muted);
+    font-size:15px;
+    max-width:52ch;
+  }
+
+  /* ---------- Screens ---------- */
+  .screens{
+    display:flex;
+    gap:16px;
+    overflow-x:auto;
+    padding:4px 0 12px;
+    margin:0 -24px;
+    padding-left:24px;
+    padding-right:24px;
+    scrollbar-width:thin;
+  }
+
+  .screens img{
+    height:340px;
+    width:auto;
+    border-radius:14px;
+    border:1px solid var(--line);
+    flex:0 0 auto;
+    background:var(--bg-alt);
+  }
+
+  /* ---------- Features + privacy ---------- */
+  .split{
+    display:grid;
+    grid-template-columns:1.1fr 1fr;
+    gap:48px;
+  }
+
+  .checklist{
+    list-style:none;
+    margin:0;
+    padding:0;
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+  }
+
+  .checklist li{
+    font-size:15px;
+    color:var(--ink);
+    padding-left:22px;
+    position:relative;
+  }
+
+  .checklist li::before{
+    content:"";
+    position:absolute;
+    left:0;
+    top:8px;
+    width:7px;
+    height:7px;
+    border-radius:50%;
+    background:var(--lamp);
+  }
+
+  .privacy p{
+    font-size:15px;
+    color:var(--muted);
+    margin:0 0 14px;
+  }
+
+  .privacy strong{
+    color:var(--ink);
+    font-weight:600;
+  }
+
+  @media (max-width:640px){
+    .split{ grid-template-columns:1fr; }
+    .hero{ padding-top:64px; }
+  }
+
+  /* ---------- Footer ---------- */
+  footer{
+    padding:48px 0 64px;
+    border-top:1px solid var(--line);
+    font-size:14px;
+    color:var(--muted-dim);
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:space-between;
+    gap:12px;
+  }
+
+  footer a{
+    color:var(--muted);
+    text-decoration:none;
+    border-bottom:1px solid var(--line);
+  }
+  footer a:hover{ color:var(--ink); border-color:var(--muted); }
+
+  /* ---------- Back to top FAB ---------- */
+  .to-top{
+    position:fixed;
+    right:24px;
+    bottom:24px;
+    width:48px;
+    height:48px;
+    border-radius:50%;
+    background:var(--lamp);
+    border:none;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+    box-shadow:0 8px 20px rgba(0,0,0,0.35);
+    opacity:0;
+    transform:translateY(16px) scale(0.9);
+    pointer-events:none;
+    transition:opacity 0.25s ease, transform 0.25s ease;
+    z-index:30;
+  }
+
+  .to-top.visible{
+    opacity:1;
+    transform:translateY(0) scale(1);
+    pointer-events:auto;
+  }
+
+  .to-top svg{
+    width:20px;
+    height:20px;
+  }
+
+  .to-top:hover{ filter:brightness(1.08); }
+</style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="wrap">
+    <span class="mark">ClockOut</span>
+    <ul>
+      <li><a href="#ritual">Rituál</a></li>
+      <li><a href="#screens">Ukázky</a></li>
+      <li><a href="#details">Podrobnosti</a></li>
+      <li><a class="lang-switch" href="../" onclick="try{localStorage.setItem('clockout-lang','en')}catch(e){}">EN</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="wrap">
+
+  <header class="hero">
+    <div class="lamp-scene" aria-hidden="true">
+      <div class="halo"></div>
+      <svg class="bulb-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M9 21c0 .55.45 1 1 1h4c.55 0 1-.45 1-1v-1H9v1zm3-19C8.14 2 5 5.14 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.86-3.14-7-7-7z"/>
+      </svg>
+    </div>
+    <h1>Pracovní den si zaslouží konec, ne pozvolné vyznění.</h1>
+    <p class="lede">Tříminutový rituál na konec práce z domova — aby zavření notebooku doopravdy znamenalo konec dne.</p>
+    <a class="cta" href="https://play.google.com/store/apps/details?id=org.clockout&hl=cs" aria-label="Stáhnout ClockOut na Google Play">
+      <img class="cta-badge" width="253" height="98" src="https://play.google.com/intl/en_us/badges/static/images/badges/cs_badge_web_generic.png" alt="Stáhnout na Google Play" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-flex';">
+      <span class="cta-fallback">
+        <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M8 5v14l11-7z"/></svg>
+        Stáhnout na Google Play
+      </span>
+    </a>
+  </header>
+
+  <section id="ritual">
+    <h2>Rituál trvá tři minuty.</h2>
+    <div class="ritual">
+      <div class="step">
+        <div class="num">1</div>
+        <div>
+          <h3>Odlož myšlenku</h3>
+          <p>Napiš si tu jednu věc, co ti pořád běží v hlavě na pozadí. Zůstane v appce, ne v hlavě, až do zítřka.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="num">2</div>
+        <div>
+          <h3>Dýchej</h3>
+          <p>Pomalý rytmus čtyři sekundy nádech, čtyři sekundy výdech, s jemným vizuálním pulzem a možností ambientního zvuku.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="num">3</div>
+        <div>
+          <h3>Vypni den</h3>
+          <p>Ťuknutím zhasni stolní lampu na obrazovce — malý, záměrný signál, že práce skončila.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="num">4</div>
+        <div>
+          <h3>Zapiš si náladu</h3>
+          <p>Jedno ťuknutí k zaznamenání nálady, se kterou den končíš, a večer je tvůj.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="screens">
+    <h2>Jak to vypadá</h2>
+    <div class="screens">
+      <img loading="lazy" decoding="async" width="191" height="340" src="../en/01.webp" srcset="../en/01.webp 1x, ../en/01@2x.webp 2x" alt="ClockOut — přehled denního rituálu">
+      <img loading="lazy" decoding="async" width="191" height="340" src="../en/02.webp" srcset="../en/02.webp 1x, ../en/02@2x.webp 2x" alt="ClockOut — krok Odlož myšlenky">
+      <img loading="lazy" decoding="async" width="191" height="340" src="../en/03.webp" srcset="../en/03.webp 1x, ../en/03@2x.webp 2x" alt="ClockOut — krok Dýchání">
+      <img loading="lazy" decoding="async" width="191" height="340" src="../en/04.webp" srcset="../en/04.webp 1x, ../en/04@2x.webp 2x" alt="ClockOut — krok Zhasnutí lampy">
+      <img loading="lazy" decoding="async" width="191" height="340" src="../en/05.webp" srcset="../en/05.webp 1x, ../en/05@2x.webp 2x" alt="ClockOut — krok Zápis nálady">
+      <img loading="lazy" decoding="async" width="191" height="340" src="../en/06.webp" srcset="../en/06.webp 1x, ../en/06@2x.webp 2x" alt="ClockOut — přehled historie rituálů">
+    </div>
+  </section>
+
+  <section id="details">
+    <div class="split">
+      <div>
+        <h2>Co je uvnitř</h2>
+        <ul class="checklist">
+          <li>Denní připomínka na konci pracovní doby s rychlým nastavením času</li>
+          <li>Jen všední dny, nebo každý den — podle tebe</li>
+          <li>Série a historie bez tlaku žebříčků</li>
+          <li>Čtyři ambientní zvuky: tibetská mísa, déšť, oceán, nebo ticho s vibracemi</li>
+          <li>Nahraj si vlastní MP3, WAV, OGG, M4A nebo FLAC, který se bude během rituálu opakovat</li>
+          <li>Angličtina a čeština, přepínatelné v appce</li>
+          <li>Design Material 3 s klidným tmavým motivem</li>
+        </ul>
+      </div>
+      <div class="privacy">
+        <h2>Soukromé od základu</h2>
+        <p><strong>Všechno zůstává v tvém telefonu.</strong> Poznámky, nálady i historie žijí v lokální databázi — žádný účet, žádná cloudová synchronizace, žádné reklamy.</p>
+        <p>Nic z toho, co napíšeš, se nikam neodesílá. Kdykoliv to jedním ťuknutím v Nastavení smažeš.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span>© 2026 Ondřej Růžička</span>
+    <span>
+      <a href="https://ruzickaond.github.io/clockout-legal/">Zásady ochrany soukromí</a>
+    </span>
+  </footer>
+
+</div>
+
+<button class="to-top" id="toTop" aria-label="Zpět nahoru">
+  <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M12 19V5M12 5l-6 6M12 5l6 6" stroke="#12162b" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+</button>
+
+<script>
+  const toTop = document.getElementById('toTop');
+  const lamp = document.querySelector('.lamp-scene');
+  let ticking = false;
+
+  function updateOnScroll() {
+    const y = window.scrollY;
+    toTop.classList.toggle('visible', y > window.innerHeight * 0.6);
+    lamp.classList.toggle('is-off', y > 24);
+    ticking = false;
+  }
+
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      requestAnimationFrame(updateOnScroll);
+      ticking = true;
+    }
+  }, { passive: true });
+
+  toTop.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    history.replaceState(null, '', window.location.pathname + window.location.search);
+  });
+</script>
+
+</body>
+</html>
