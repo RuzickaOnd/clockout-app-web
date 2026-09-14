@@ -492,12 +492,12 @@
   <section id="screens">
     <h2>What it looks like</h2>
     <div class="screens">
-      <img loading="lazy" decoding="async" width="191" height="340" src="en/01.webp" alt="ClockOut — daily ritual overview">
-      <img loading="lazy" decoding="async" width="191" height="340" src="en/02.webp" alt="ClockOut — park your thoughts step">
-      <img loading="lazy" decoding="async" width="191" height="340" src="en/03.webp" alt="ClockOut — breathing step">
-      <img loading="lazy" decoding="async" width="191" height="340" src="en/04.webp" alt="ClockOut — turn off the desk lamp step">
-      <img loading="lazy" decoding="async" width="191" height="340" src="en/05.webp" alt="ClockOut — log how you feel step">
-      <img loading="lazy" decoding="async" width="191" height="340" src="en/06.webp" alt="ClockOut — ritual history overview">
+      <img loading="lazy" decoding="async" width="191" height="340" src="en/01.webp" srcset="en/01.webp 1x, en/01@2x.webp 2x" alt="ClockOut — daily ritual overview">
+      <img loading="lazy" decoding="async" width="191" height="340" src="en/02.webp" srcset="en/02.webp 1x, en/02@2x.webp 2x" alt="ClockOut — park your thoughts step">
+      <img loading="lazy" decoding="async" width="191" height="340" src="en/03.webp" srcset="en/03.webp 1x, en/03@2x.webp 2x" alt="ClockOut — breathing step">
+      <img loading="lazy" decoding="async" width="191" height="340" src="en/04.webp" srcset="en/04.webp 1x, en/04@2x.webp 2x" alt="ClockOut — turn off the desk lamp step">
+      <img loading="lazy" decoding="async" width="191" height="340" src="en/05.webp" srcset="en/05.webp 1x, en/05@2x.webp 2x" alt="ClockOut — log how you feel step">
+      <img loading="lazy" decoding="async" width="191" height="340" src="en/06.webp" srcset="en/06.webp 1x, en/06@2x.webp 2x" alt="ClockOut — ritual history overview">
     </div>
   </section>
 
@@ -541,11 +541,22 @@
 <script>
   const toTop = document.getElementById('toTop');
   const lamp = document.querySelector('.lamp-scene');
+  let ticking = false;
+
+  function updateOnScroll() {
+    const y = window.scrollY;
+    toTop.classList.toggle('visible', y > window.innerHeight * 0.6);
+    lamp.classList.toggle('is-off', y > 24);
+    ticking = false;
+  }
+
   window.addEventListener('scroll', () => {
-    const scrolled = window.scrollY > 24;
-    toTop.classList.toggle('visible', window.scrollY > window.innerHeight * 0.6);
-    lamp.classList.toggle('is-off', scrolled);
-  });
+    if (!ticking) {
+      requestAnimationFrame(updateOnScroll);
+      ticking = true;
+    }
+  }, { passive: true });
+
   toTop.addEventListener('click', () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
     history.replaceState(null, '', window.location.pathname + window.location.search);
