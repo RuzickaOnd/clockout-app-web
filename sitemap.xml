@@ -1,8 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://ruzickaond.github.io/clockout-app-web/</loc>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ruzickaond.github.io/clockout-app-web/"/>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://ruzickaond.github.io/clockout-app-web/cs/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ruzickaond.github.io/clockout-app-web/"/>
+  </url>
+  <url>
+    <loc>https://ruzickaond.github.io/clockout-app-web/cs/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ruzickaond.github.io/clockout-app-web/"/>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://ruzickaond.github.io/clockout-app-web/cs/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ruzickaond.github.io/clockout-app-web/"/>
   </url>
 </urlset>
