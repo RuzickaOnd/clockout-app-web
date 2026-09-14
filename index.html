@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ClockOut — End your workday, on purpose</title>
+<meta name="description" content="A three-minute ritual to end your workday, so it stops spilling into your evening. Free, private, ad-free.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,340;0,9..144,480;0,9..144,600;1,9..144,420&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#12162b;
+    --bg-alt:#191f3d;
+    --ink:#f1ecdd;
+    --muted:#93a1c9;
+    --muted-dim:#5c6488;
+    --lamp:#f0a83c;
+    --lamp-soft:#7a5a2a;
+    --line: rgba(241,236,221,0.12);
+    --serif: 'Fraunces', serif;
+    --sans: 'Work Sans', sans-serif;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:var(--sans);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  a{color:inherit;}
+
+  .wrap{
+    max-width:760px;
+    margin:0 auto;
+    padding:0 24px;
+  }
+
+  /* ---------- Site nav ---------- */
+  .site-nav{
+    position:sticky;
+    top:0;
+    z-index:20;
+    background:rgba(18,22,43,0.78);
+    backdrop-filter:blur(10px);
+    -webkit-backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+
+  .site-nav .wrap{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    height:64px;
+  }
+
+  .site-nav .mark{
+    font-family:var(--serif);
+    font-size:19px;
+    font-weight:600;
+    letter-spacing:-0.01em;
+    color:var(--ink);
+  }
+
+  .site-nav ul{
+    list-style:none;
+    display:flex;
+    gap:28px;
+    margin:0;
+    padding:0;
+  }
+
+  .site-nav a{
+    font-size:14px;
+    color:var(--muted);
+    text-decoration:none;
+    transition:color 0.2s ease;
+    -webkit-tap-highlight-color:transparent;
+  }
+  .site-nav a,
+  .site-nav a:visited,
+  .site-nav a:active{ color:var(--muted); }
+  .site-nav a:hover{ color:var(--ink); }
+  .site-nav a:focus-visible{
+    color:var(--ink);
+    outline:2px solid var(--lamp);
+    outline-offset:4px;
+    border-radius:2px;
+  }
+
+  @media (max-width:560px){
+    .site-nav ul{ gap:18px; }
+  }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    padding:80px 0 64px;
+    text-align:center;
+  }
+
+  section[id]{
+    scroll-margin-top:64px;
+  }
+
+  .lamp-scene{
+    width:96px;
+    height:96px;
+    margin:0 auto 40px;
+    position:relative;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+
+  .halo{
+    position:absolute;
+    inset:0;
+    border-radius:50%;
+    background:radial-gradient(circle, rgba(240,168,60,0.55) 0%, rgba(240,168,60,0.18) 45%, rgba(240,168,60,0) 72%);
+    animation: halo-pulse 2.4s ease-in-out infinite;
+    transition:opacity 0.7s ease;
+  }
+
+  @keyframes halo-pulse{
+    0%, 100%{ transform:scale(0.92); opacity:0.85; }
+    50%{ transform:scale(1.1); opacity:1; }
+  }
+
+  .bulb-icon{
+    position:relative;
+    width:52px;
+    height:52px;
+    overflow:visible;
+  }
+
+  .bulb-icon path{
+    fill:var(--lamp);
+    filter:drop-shadow(0 0 10px rgba(240,168,60,0.55));
+    transition:fill 0.7s ease, filter 0.7s ease;
+  }
+
+  .lamp-scene.is-off .halo{
+    opacity:0;
+    animation-play-state:paused;
+  }
+
+  .lamp-scene.is-off .bulb-icon path{
+    fill:var(--muted-dim);
+    filter:none;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .halo{ animation:none; }
+  }
+
+  h1{
+    font-family:var(--serif);
+    font-weight:600;
+    font-optical-sizing:auto;
+    font-size:clamp(38px, 7.5vw, 62px);
+    line-height:1.08;
+    margin:0 0 22px;
+    letter-spacing:-0.02em;
+  }
+
+  .lede{
+    font-size:18px;
+    color:var(--muted);
+    max-width:480px;
+    margin:0 auto 40px;
+  }
+
+  .cta{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    padding:15px 30px;
+    border-radius:999px;
+    background:var(--lamp);
+    color:var(--bg);
+    text-decoration:none;
+    font-family:var(--sans);
+    font-weight:600;
+    font-size:15px;
+    transition:transform 0.2s ease, filter 0.2s ease;
+  }
+
+  .cta:hover{
+    filter:brightness(1.07);
+    transform:translateY(-1px);
+  }
+
+  .cta svg{
+    width:18px;
+    height:18px;
+    flex:0 0 auto;
+  }
+
+  /* ---------- Section shared ---------- */
+  section{
+    padding:64px 0;
+    border-top:1px solid var(--line);
+  }
+
+  h2{
+    font-family:var(--serif);
+    font-weight:480;
+    font-size:28px;
+    margin:0 0 36px;
+    max-width:420px;
+  }
+
+  /* ---------- Ritual ---------- */
+  .ritual{
+    display:flex;
+    flex-direction:column;
+    gap:28px;
+  }
+
+  .step{
+    display:grid;
+    grid-template-columns:40px 1fr;
+    gap:18px;
+    align-items:start;
+  }
+
+  .step .num{
+    font-family:var(--serif);
+    font-size:22px;
+    color:var(--lamp);
+    line-height:1.4;
+  }
+
+  .step h3{
+    font-family:var(--sans);
+    font-weight:600;
+    font-size:17px;
+    margin:0 0 6px;
+  }
+
+  .step p{
+    margin:0;
+    color:var(--muted);
+    font-size:15px;
+    max-width:52ch;
+  }
+
+  /* ---------- Screens ---------- */
+  .screens{
+    display:flex;
+    gap:16px;
+    overflow-x:auto;
+    padding:4px 0 12px;
+    margin:0 -24px;
+    padding-left:24px;
+    padding-right:24px;
+    scrollbar-width:thin;
+  }
+
+  .screens img{
+    height:340px;
+    width:auto;
+    border-radius:14px;
+    border:1px solid var(--line);
+    flex:0 0 auto;
+  }
+
+  /* ---------- Features + privacy ---------- */
+  .split{
+    display:grid;
+    grid-template-columns:1.1fr 1fr;
+    gap:48px;
+  }
+
+  .checklist{
+    list-style:none;
+    margin:0;
+    padding:0;
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+  }
+
+  .checklist li{
+    font-size:15px;
+    color:var(--ink);
+    padding-left:22px;
+    position:relative;
+  }
+
+  .checklist li::before{
+    content:"";
+    position:absolute;
+    left:0;
+    top:8px;
+    width:7px;
+    height:7px;
+    border-radius:50%;
+    background:var(--lamp);
+  }
+
+  .privacy p{
+    font-size:15px;
+    color:var(--muted);
+    margin:0 0 14px;
+  }
+
+  .privacy strong{
+    color:var(--ink);
+    font-weight:600;
+  }
+
+  @media (max-width:640px){
+    .split{ grid-template-columns:1fr; }
+    .hero{ padding-top:64px; }
+  }
+
+  /* ---------- Footer ---------- */
+  footer{
+    padding:48px 0 64px;
+    border-top:1px solid var(--line);
+    font-size:14px;
+    color:var(--muted-dim);
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:space-between;
+    gap:12px;
+  }
+
+  footer a{
+    color:var(--muted);
+    text-decoration:none;
+    border-bottom:1px solid var(--line);
+  }
+  footer a:hover{ color:var(--ink); border-color:var(--muted); }
+
+  /* ---------- Back to top FAB ---------- */
+  .to-top{
+    position:fixed;
+    right:24px;
+    bottom:24px;
+    width:48px;
+    height:48px;
+    border-radius:50%;
+    background:var(--lamp);
+    border:none;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+    box-shadow:0 8px 20px rgba(0,0,0,0.35);
+    opacity:0;
+    transform:translateY(16px) scale(0.9);
+    pointer-events:none;
+    transition:opacity 0.25s ease, transform 0.25s ease;
+    z-index:30;
+  }
+
+  .to-top.visible{
+    opacity:1;
+    transform:translateY(0) scale(1);
+    pointer-events:auto;
+  }
+
+  .to-top svg{
+    width:20px;
+    height:20px;
+  }
+
+  .to-top:hover{ filter:brightness(1.08); }
+</style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="wrap">
+    <span class="mark">ClockOut</span>
+    <ul>
+      <li><a href="#ritual">Ritual</a></li>
+      <li><a href="#screens">Screens</a></li>
+      <li><a href="#details">Details</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="wrap">
+
+  <header class="hero">
+    <div class="lamp-scene" aria-hidden="true">
+      <div class="halo"></div>
+      <svg class="bulb-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M9 21c0 .55.45 1 1 1h4c.55 0 1-.45 1-1v-1H9v1zm3-19C8.14 2 5 5.14 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.86-3.14-7-7-7z"/>
+      </svg>
+    </div>
+    <h1>Your workday needs an ending, not a fade-out.</h1>
+    <p class="lede">A three-minute ritual for the end of remote work — so the laptop closing actually means the day is done.</p>
+    <a class="cta" href="https://play.google.com/store/apps/details?id=org.clockout" aria-label="Get ClockOut on Google Play">
+      <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M8 5v14l11-7z"/></svg>
+      Get it on Google Play
+    </a>
+  </header>
+
+  <section id="ritual">
+    <h2>The ritual takes three minutes.</h2>
+    <div class="ritual">
+      <div class="step">
+        <div class="num">1</div>
+        <div>
+          <h3>Park a thought</h3>
+          <p>Write down the one thing still running in the background. It stays in the app, not in your head, until tomorrow.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="num">2</div>
+        <div>
+          <h3>Breathe</h3>
+          <p>A slow four-second in, four-second out pacer, with a soft visual pulse and a choice of ambient sound.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="num">3</div>
+        <div>
+          <h3>Switch the day off</h3>
+          <p>Tap to dim the desk lamp on screen — a small, deliberate signal that work has ended.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="num">4</div>
+        <div>
+          <h3>Log how you feel</h3>
+          <p>One tap to mark the mood you're leaving the day with, then the evening is yours.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="screens">
+    <h2>What it looks like</h2>
+    <div class="screens">
+      <img loading="lazy" src="https://play-lh.googleusercontent.com/bbBujMa5GNiFRzrRE_JiwFnM1wiaOajiZBepJlnS1cC8ute2b63t8EK4vDz_Yhvuofq-MOkh_1ePOfrzSnP8=w526-h296" alt="ClockOut screenshot 1">
+      <img loading="lazy" src="https://play-lh.googleusercontent.com/wcWjw_w2VVyPgpzhH8PYH4jPBGeFjpys74yZeC_dhAeBiLjTgX_0Rrs0VW_UJLJbbEE5Q2U_9csmbJCmyM5N=w526-h296" alt="ClockOut screenshot 2">
+      <img loading="lazy" src="https://play-lh.googleusercontent.com/TvoQBj_TU62ccIdDsqQzXVrEhthVzjw1QYSULdgYuLuQy7kQaeUMRqRivTHoq63g452r_4KEpJ4imrAeRWKy=w526-h296" alt="ClockOut screenshot 3">
+      <img loading="lazy" src="https://play-lh.googleusercontent.com/DBs5RWfpYS67MxNpltLTa0IAMtHGsWgbp50xCEpwF2-5RdbY1v05jcetzg8KpDXcKdAymz9hPgh1t2trVRNi=w526-h296" alt="ClockOut screenshot 4">
+      <img loading="lazy" src="https://play-lh.googleusercontent.com/Mcn7WSol5CSfiUQiPf2HqH2sPR-BLpDa9fbDycwBHRmc-FtCcPt4sdFae4C11jAC_XC_uxgWaFrP8z3UJr0iMQ=w526-h296" alt="ClockOut screenshot 5">
+      <img loading="lazy" src="https://play-lh.googleusercontent.com/k31YcgGInDkSmExacoQuU8H6drd6MS7Y4VzRZVC5hBamYvRrJu9CLz9lO7mXYyfd28F9S09DLP8SxuN5yeuRPQ=w526-h296" alt="ClockOut screenshot 6">
+    </div>
+  </section>
+
+  <section id="details">
+    <div class="split">
+      <div>
+        <h2>What's inside</h2>
+        <ul class="checklist">
+          <li>Daily reminder at the end of your workday, with quick time presets</li>
+          <li>Weekdays only, or every day — your choice</li>
+          <li>Streaks and history, without the pressure of a leaderboard</li>
+          <li>Four ambient sounds: singing bowl, rain, ocean, or silence with haptics</li>
+          <li>Import your own MP3, WAV, OGG, M4A or FLAC to loop during the ritual</li>
+          <li>English and Czech, switchable in the app</li>
+          <li>Material 3 design with a calm dark theme</li>
+        </ul>
+      </div>
+      <div class="privacy">
+        <h2>Private by design</h2>
+        <p><strong>Everything stays on your phone.</strong> Notes, moods and history live in a local database — no account, no cloud sync, no ads.</p>
+        <p>Nothing you write is ever uploaded. Wipe it all with one tap in Settings, any time.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span>© 2026 Ondřej Růžička</span>
+    <span>
+      <a href="https://ruzickaond.github.io/clockout-legal/">Privacy policy</a>
+    </span>
+  </footer>
+
+</div>
+
+<button class="to-top" id="toTop" aria-label="Back to top">
+  <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M12 19V5M12 5l-6 6M12 5l6 6" stroke="#12162b" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+</button>
+
+<script>
+  const toTop = document.getElementById('toTop');
+  const lamp = document.querySelector('.lamp-scene');
+  window.addEventListener('scroll', () => {
+    const scrolled = window.scrollY > 24;
+    toTop.classList.toggle('visible', window.scrollY > window.innerHeight * 0.6);
+    lamp.classList.toggle('is-off', scrolled);
+  });
+  toTop.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+</script>
+
+</body>
+</html>
