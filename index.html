@@ -2,10 +2,24 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<script>
+(function(){
+  try {
+    var pref = localStorage.getItem('clockout-lang');
+    if (pref === 'cs') { location.replace('cs/'); return; }
+    if (!pref && navigator.language && navigator.language.toLowerCase().indexOf('cs') === 0) {
+      location.replace('cs/');
+    }
+  } catch(e) {}
+})();
+</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ClockOut — End your workday, on purpose</title>
 <meta name="description" content="A three-minute ritual to end your workday, so it stops spilling into your evening. Free, private, ad-free.">
 <link rel="canonical" href="https://ruzickaond.github.io/clockout-app-web/">
+<link rel="alternate" hreflang="en" href="https://ruzickaond.github.io/clockout-app-web/">
+<link rel="alternate" hreflang="cs" href="https://ruzickaond.github.io/clockout-app-web/cs/">
+<link rel="alternate" hreflang="x-default" href="https://ruzickaond.github.io/clockout-app-web/">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -126,6 +140,13 @@
     outline:2px solid var(--lamp);
     outline-offset:4px;
     border-radius:2px;
+  }
+
+  .lang-switch{
+    font-size:13px !important;
+    padding:5px 10px;
+    border:1px solid var(--line);
+    border-radius:999px;
   }
 
   @media (max-width:560px){
@@ -431,6 +452,7 @@
       <li><a href="#ritual">Ritual</a></li>
       <li><a href="#screens">Screens</a></li>
       <li><a href="#details">Details</a></li>
+      <li><a class="lang-switch" href="cs/" onclick="try{localStorage.setItem('clockout-lang','cs')}catch(e){}">CS</a></li>
     </ul>
   </div>
 </nav>
