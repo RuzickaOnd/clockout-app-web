@@ -512,6 +512,7 @@
   });
   toTop.addEventListener('click', () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
+    history.replaceState(null, '', window.location.pathname + window.location.search);
   });
 </script>
 
