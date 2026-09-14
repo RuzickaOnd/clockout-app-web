@@ -37,3 +37,9 @@ Then enable Pages the same way as step 4 above.
 - Screenshots are currently hotlinked directly from the Play Store CDN. That works fine on a real domain, but for long-term reliability, consider exporting your own screenshots into an `/assets` folder and swapping the `src` attributes.
 - Copy is in English only, matching the primary Play Store listing. The app itself supports Czech — a language toggle would be a natural next step if you want a CZ version of the page.
 - Once you have a custom domain, add a `CNAME` file with the domain name at the repo root and point your DNS at GitHub's Pages IPs / `ruzickaond.github.io`.
+
+## Languages
+
+The site is bilingual: English at the root (`/`), Czech under `/cs/`. Visitors whose browser language is Czech get auto-redirected to `/cs/` on first visit; the choice is remembered in `localStorage` after that (manual switch via the EN/CS link in the nav always wins). Both versions share the same screenshots in `/en/`.
+
+When editing copy, keep both `index.html` and `cs/index.html` in sync structurally (same sections/ids), since they share the same CSS and JS inline in each file.
