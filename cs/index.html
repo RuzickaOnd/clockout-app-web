@@ -334,6 +334,85 @@
     border:1px solid var(--line);
     flex:0 0 auto;
     background:var(--bg-alt);
+    display:block;
+  }
+
+  .screen-thumb{
+    padding:0;
+    border:none;
+    background:none;
+    cursor:zoom-in;
+    border-radius:14px;
+    flex:0 0 auto;
+    -webkit-tap-highlight-color:transparent;
+  }
+
+  .screen-thumb:focus-visible{
+    outline:2px solid var(--lamp);
+    outline-offset:3px;
+    border-radius:16px;
+  }
+
+  /* ---------- Lightbox ---------- */
+  .lightbox{
+    position:fixed;
+    inset:0;
+    background:rgba(9,11,22,0.92);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    z-index:100;
+    padding:24px;
+    opacity:0;
+    transition:opacity 0.2s ease;
+  }
+
+  .lightbox[hidden]{ display:none; }
+  .lightbox.visible{ opacity:1; }
+
+  .lb-img{
+    max-width:min(90vw, 460px);
+    max-height:85vh;
+    width:auto;
+    height:auto;
+    border-radius:14px;
+    box-shadow:0 24px 64px rgba(0,0,0,0.55);
+  }
+
+  .lb-close,
+  .lb-nav{
+    position:fixed;
+    background:rgba(241,236,221,0.1);
+    border:1px solid var(--line);
+    color:var(--ink);
+    border-radius:50%;
+    width:44px;
+    height:44px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+    -webkit-tap-highlight-color:transparent;
+  }
+
+  .lb-close:hover,
+  .lb-nav:hover{ background:rgba(241,236,221,0.2); }
+
+  .lb-close:focus-visible,
+  .lb-nav:focus-visible{
+    outline:2px solid var(--lamp);
+    outline-offset:2px;
+  }
+
+  .lb-close{ top:20px; right:20px; }
+  .lb-prev{ left:20px; top:50%; transform:translateY(-50%); }
+  .lb-next{ right:20px; top:50%; transform:translateY(-50%); }
+
+  .lb-close svg, .lb-nav svg{ width:20px; height:20px; }
+
+  @media (max-width:640px){
+    .lb-prev{ left:8px; }
+    .lb-next{ right:8px; }
   }
 
   /* ---------- Features + privacy ---------- */
@@ -512,12 +591,24 @@
   <section id="screens">
     <h2>Jak to vypadá</h2>
     <div class="screens">
-      <img loading="lazy" decoding="async" width="191" height="340" src="01.webp" srcset="01.webp 1x, 01@2x.webp 2x" alt="ClockOut — přehled denního rituálu">
-      <img loading="lazy" decoding="async" width="191" height="340" src="02.webp" srcset="02.webp 1x, 02@2x.webp 2x" alt="ClockOut — krok Odlož myšlenky">
-      <img loading="lazy" decoding="async" width="191" height="340" src="03.webp" srcset="03.webp 1x, 03@2x.webp 2x" alt="ClockOut — krok Dýchání">
-      <img loading="lazy" decoding="async" width="191" height="340" src="04.webp" srcset="04.webp 1x, 04@2x.webp 2x" alt="ClockOut — krok Zhasnutí lampy">
-      <img loading="lazy" decoding="async" width="191" height="340" src="05.webp" srcset="05.webp 1x, 05@2x.webp 2x" alt="ClockOut — krok Zápis nálady">
-      <img loading="lazy" decoding="async" width="191" height="340" src="06.webp" srcset="06.webp 1x, 06@2x.webp 2x" alt="ClockOut — přehled historie rituálů">
+      <button type="button" class="screen-thumb" data-full="01@2x.webp" aria-label="Zvětšit screenshot: přehled denního rituálu">
+        <img loading="lazy" decoding="async" width="191" height="340" src="01.webp" srcset="01.webp 1x, 01@2x.webp 2x" alt="ClockOut — přehled denního rituálu">
+      </button>
+      <button type="button" class="screen-thumb" data-full="02@2x.webp" aria-label="Zvětšit screenshot: krok Odlož myšlenky">
+        <img loading="lazy" decoding="async" width="191" height="340" src="02.webp" srcset="02.webp 1x, 02@2x.webp 2x" alt="ClockOut — krok Odlož myšlenky">
+      </button>
+      <button type="button" class="screen-thumb" data-full="03@2x.webp" aria-label="Zvětšit screenshot: krok Dýchání">
+        <img loading="lazy" decoding="async" width="191" height="340" src="03.webp" srcset="03.webp 1x, 03@2x.webp 2x" alt="ClockOut — krok Dýchání">
+      </button>
+      <button type="button" class="screen-thumb" data-full="04@2x.webp" aria-label="Zvětšit screenshot: krok Zhasnutí lampy">
+        <img loading="lazy" decoding="async" width="191" height="340" src="04.webp" srcset="04.webp 1x, 04@2x.webp 2x" alt="ClockOut — krok Zhasnutí lampy">
+      </button>
+      <button type="button" class="screen-thumb" data-full="05@2x.webp" aria-label="Zvětšit screenshot: krok Zápis nálady">
+        <img loading="lazy" decoding="async" width="191" height="340" src="05.webp" srcset="05.webp 1x, 05@2x.webp 2x" alt="ClockOut — krok Zápis nálady">
+      </button>
+      <button type="button" class="screen-thumb" data-full="06@2x.webp" aria-label="Zvětšit screenshot: přehled historie rituálů">
+        <img loading="lazy" decoding="async" width="191" height="340" src="06.webp" srcset="06.webp 1x, 06@2x.webp 2x" alt="ClockOut — přehled historie rituálů">
+      </button>
     </div>
   </section>
 
@@ -558,6 +649,19 @@
   </svg>
 </button>
 
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Náhled screenshotu" hidden>
+  <button class="lb-close" id="lbClose" aria-label="Zavřít">
+    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+  </button>
+  <button class="lb-nav lb-prev" id="lbPrev" aria-label="Předchozí screenshot">
+    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15 6l-6 6 6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
+  <img class="lb-img" id="lbImg" src="" alt="">
+  <button class="lb-nav lb-next" id="lbNext" aria-label="Další screenshot">
+    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
+</div>
+
 <script>
   const toTop = document.getElementById('toTop');
   const lamp = document.querySelector('.lamp-scene');
@@ -581,6 +685,47 @@
     window.scrollTo({ top: 0, behavior: 'smooth' });
     history.replaceState(null, '', window.location.pathname + window.location.search);
   });
+
+  // Screenshot lightbox
+  (function(){
+    const thumbs = Array.from(document.querySelectorAll('.screen-thumb'));
+    const lightbox = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lbImg');
+    const lbClose = document.getElementById('lbClose');
+    const lbPrev = document.getElementById('lbPrev');
+    const lbNext = document.getElementById('lbNext');
+    let current = 0;
+
+    function openAt(i){
+      current = (i + thumbs.length) % thumbs.length;
+      const thumb = thumbs[current];
+      lbImg.src = thumb.dataset.full;
+      lbImg.alt = thumb.querySelector('img').alt;
+      lightbox.hidden = false;
+      requestAnimationFrame(() => lightbox.classList.add('visible'));
+      document.body.style.overflow = 'hidden';
+      lbClose.focus();
+    }
+
+    function closeLightbox(){
+      lightbox.classList.remove('visible');
+      document.body.style.overflow = '';
+      setTimeout(() => { lightbox.hidden = true; }, 200);
+      thumbs[current].focus();
+    }
+
+    thumbs.forEach((t, i) => t.addEventListener('click', () => openAt(i)));
+    lbClose.addEventListener('click', closeLightbox);
+    lbPrev.addEventListener('click', () => openAt(current - 1));
+    lbNext.addEventListener('click', () => openAt(current + 1));
+    lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
+    document.addEventListener('keydown', (e) => {
+      if (lightbox.hidden) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft') openAt(current - 1);
+      if (e.key === 'ArrowRight') openAt(current + 1);
+    });
+  })();
 </script>
 
 </body>
