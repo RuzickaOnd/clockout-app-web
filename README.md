@@ -26,20 +26,20 @@ Then enable Pages the same way as step 4 above.
 
 ## What's in the page
 
-- Sticky nav with anchor links to Ritual / Screens / Details.
+- Sticky nav with anchor links to Ritual / Way home / Screens / Details.
 - Hero with a Material `Lightbulb` icon and pulsing halo, matching the in-app ritual — dims on scroll, relights back at the top.
 - Self-contained "Get it on Google Play" button (no dependency on Google's hotlinked badge image).
+- "The Way Home" and "The Night Sky" section (the progression added in 1.3.0).
 - Screenshot strip, feature checklist, and a short privacy note.
 - Floating back-to-top button that fades in after scrolling.
 
 ## Notes / next steps
 
-- Screenshots are currently hotlinked directly from the Play Store CDN. That works fine on a real domain, but for long-term reliability, consider exporting your own screenshots into an `/assets` folder and swapping the `src` attributes.
-- Copy is in English only, matching the primary Play Store listing. The app itself supports Czech — a language toggle would be a natural next step if you want a CZ version of the page.
+- Screenshots in `en/` and `cs/` are the Play Store screenshots of that language (`play/screenshots/<lang>/01–08.png` in the app repo) scaled down to WebP at 191 × 340 and 382 × 680 (`@2x`, served through `srcset`). After re-rendering the Play screenshots, regenerate them with Pillow — `Image.resize(..., LANCZOS).save(..., "WEBP", quality=82, method=6)` — and keep the order and `alt` texts in `index.html` and `cs/index.html` in step.
 - Once you have a custom domain, add a `CNAME` file with the domain name at the repo root and point your DNS at GitHub's Pages IPs / `ruzickaond.github.io`.
 
 ## Languages
 
-The site is bilingual: English at the root (`/`), Czech under `/cs/`. Visitors whose browser language is Czech get auto-redirected to `/cs/` on first visit; the choice is remembered in `localStorage` after that (manual switch via the EN/CS link in the nav always wins). Both versions share the same screenshots in `/en/`.
+The site is bilingual: English at the root (`/`), Czech under `/cs/`. Visitors whose browser language is Czech get auto-redirected to `/cs/` on first visit; the choice is remembered in `localStorage` after that (manual switch via the EN/CS link in the nav always wins). Each version shows the screenshots of its own language, `/en/` and `/cs/`.
 
 When editing copy, keep both `index.html` and `cs/index.html` in sync structurally (same sections/ids), since they share the same CSS and JS inline in each file.
