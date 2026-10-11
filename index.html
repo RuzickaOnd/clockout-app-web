@@ -160,8 +160,17 @@
     .site-nav .mark{ font-size:17px; }
   }
 
-  @media (max-width:374px){
+  /* The sections hidden first sit directly below the ones still linked. */
+  @media (max-width:520px){
     .site-nav .nav-screens{ display:none; }
+  }
+
+  @media (max-width:440px){
+    .site-nav .nav-ritual{ display:none; }
+  }
+
+  @media (max-width:374px){
+    .site-nav .nav-details{ display:none; }
   }
 
   /* ---------- Hero ---------- */
@@ -546,10 +555,10 @@
   <div class="wrap">
     <span class="mark">ClockOut</span>
     <ul>
-      <li><a href="#ritual">Ritual</a></li>
+      <li class="nav-ritual"><a href="#ritual">Ritual</a></li>
       <li><a href="#way-home">Way home</a></li>
       <li class="nav-screens"><a href="#screens">Screens</a></li>
-      <li><a href="#details">Details</a></li>
+      <li class="nav-details"><a href="#details">Details</a></li>
       <li><a class="lang-switch" href="cs/" onclick="try{localStorage.setItem('clockout-lang','cs')}catch(e){}">CS</a></li>
     </ul>
   </div>

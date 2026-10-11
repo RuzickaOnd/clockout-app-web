@@ -11,7 +11,7 @@
 })();
 </script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ClockOut — Ukonči pracovní den vědomě</title>
+<title>Padla — Ukonči pracovní den vědomě</title>
 <meta name="description" content="Tříminutový rituál na konec pracovního dne, aby nezasahoval do večera. Zdarma, soukromé, bez reklam.">
 <link rel="canonical" href="https://ruzickaond.github.io/clockout-app-web/cs/">
 <link rel="alternate" hreflang="en" href="https://ruzickaond.github.io/clockout-app-web/">
@@ -23,12 +23,12 @@
 <link rel="manifest" href="../site.webmanifest">
 
 <meta property="og:type" content="website">
-<meta property="og:title" content="ClockOut — Ukonči pracovní den vědomě">
+<meta property="og:title" content="Padla — Ukonči pracovní den vědomě">
 <meta property="og:description" content="Tříminutový rituál na konec pracovního dne, aby nezasahoval do večera. Zdarma, soukromé, bez reklam.">
 <meta property="og:url" content="https://ruzickaond.github.io/clockout-app-web/cs/">
 <meta property="og:image" content="https://play-lh.googleusercontent.com/MNSv7ECEiLILvRtvFfzArZCT3wae8mAfHuKnqLDiFg-m8raJEzzhiiYgs5hn_9fF_Y8qldCKCaHu7s63d5mgTw=w512-h512">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ClockOut — Ukonči pracovní den vědomě">
+<meta name="twitter:title" content="Padla — Ukonči pracovní den vědomě">
 <meta name="twitter:description" content="Tříminutový rituál na konec pracovního dne, aby nezasahoval do večera.">
 <meta name="twitter:image" content="https://play-lh.googleusercontent.com/MNSv7ECEiLILvRtvFfzArZCT3wae8mAfHuKnqLDiFg-m8raJEzzhiiYgs5hn_9fF_Y8qldCKCaHu7s63d5mgTw=w512-h512">
 
@@ -36,7 +36,8 @@
 {
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
-  "name": "ClockOut",
+  "name": "Padla",
+  "alternateName": "ClockOut",
   "operatingSystem": "ANDROID",
   "applicationCategory": "LifestyleApplication",
   "url": "https://ruzickaond.github.io/clockout-app-web/cs/",
@@ -123,6 +124,7 @@
   }
 
   .site-nav a{
+    white-space:nowrap;
     font-size:14px;
     color:var(--muted);
     text-decoration:none;
@@ -149,6 +151,25 @@
 
   @media (max-width:560px){
     .site-nav ul{ gap:18px; }
+  }
+
+  @media (max-width:420px){
+    .site-nav ul{ gap:12px; }
+    .site-nav a{ font-size:13px; }
+    .site-nav .mark{ font-size:17px; }
+  }
+
+  /* The sections hidden first sit directly below the ones still linked. */
+  @media (max-width:520px){
+    .site-nav .nav-screens{ display:none; }
+  }
+
+  @media (max-width:440px){
+    .site-nav .nav-ritual{ display:none; }
+  }
+
+  @media (max-width:374px){
+    .site-nav .nav-details{ display:none; }
   }
 
   /* ---------- Hero ---------- */
@@ -306,6 +327,13 @@
     font-weight:600;
     font-size:17px;
     margin:0 0 6px;
+  }
+
+  .step-icon{
+    width:24px;
+    height:24px;
+    display:block;
+    margin-top:4px;
   }
 
   .step p{
@@ -524,11 +552,12 @@
 
 <nav class="site-nav">
   <div class="wrap">
-    <span class="mark">ClockOut</span>
+    <span class="mark">Padla</span>
     <ul>
-      <li><a href="#ritual">Rituál</a></li>
-      <li><a href="#screens">Ukázky</a></li>
-      <li><a href="#details">Podrobnosti</a></li>
+      <li class="nav-ritual"><a href="#ritual">Rituál</a></li>
+      <li><a href="#way-home">Cesta domů</a></li>
+      <li class="nav-screens"><a href="#screens">Ukázky</a></li>
+      <li class="nav-details"><a href="#details">Podrobnosti</a></li>
       <li><a class="lang-switch" href="../" onclick="try{localStorage.setItem('clockout-lang','en')}catch(e){}">EN</a></li>
     </ul>
   </div>
@@ -545,7 +574,7 @@
     </div>
     <h1>Pracovní den si zaslouží konec, ne pozvolné vyznění.</h1>
     <p class="lede">Tříminutový rituál na konec práce z domova — aby zavření notebooku doopravdy znamenalo konec dne.</p>
-    <a class="cta" href="https://play.google.com/store/apps/details?id=org.clockout&hl=cs" aria-label="Stáhnout ClockOut na Google Play">
+    <a class="cta" href="https://play.google.com/store/apps/details?id=org.clockout&hl=cs" aria-label="Stáhnout aplikaci Padla na Google Play">
       <img class="cta-badge" width="253" height="98" src="https://play.google.com/intl/en_us/badges/static/images/badges/cs_badge_web_generic.png" alt="Stáhnout na Google Play" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-flex';">
       <span class="cta-fallback">
         <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M8 5v14l11-7z"/></svg>
@@ -568,7 +597,7 @@
         <div class="num">2</div>
         <div>
           <h3>Dýchej</h3>
-          <p>Pomalý rytmus čtyři sekundy nádech, čtyři sekundy výdech, s jemným vizuálním pulzem a možností ambientního zvuku.</p>
+          <p>Pomalý rytmus čtyři sekundy nádech, čtyři sekundy výdech, se čtyřmi animacemi na výběr, volitelným zvukovým doprovodem a jemnou haptikou.</p>
         </div>
       </div>
       <div class="step">
@@ -588,26 +617,65 @@
     </div>
   </section>
 
+  <section id="way-home">
+    <h2>Každý večer o kus blíž domů.</h2>
+    <div class="ritual">
+      <div class="step">
+        <div class="num">
+          <svg class="step-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20c4-2 5-6 8-8s5-1 8-6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="20" cy="6" r="2" fill="currentColor"/></svg>
+        </div>
+        <div>
+          <h3>Cesta domů</h3>
+          <p>Práce z domova vzala cestu z kanceláře, která dřív den přirozeně ukončila. Každý uzavřený den tě po ní posune o kus dál — deset stupňů, od Zaklapnutého notebooku přes Most a Branku až po Doma.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="num">
+          <svg class="step-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 7l5 3 4-4 5 7" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/><circle cx="5" cy="7" r="1.8" fill="currentColor"/><circle cx="10" cy="10" r="1.8" fill="currentColor"/><circle cx="14" cy="6" r="1.8" fill="currentColor"/><circle cx="19" cy="13" r="1.8" fill="currentColor"/><circle cx="8" cy="18" r="1.2" fill="currentColor" opacity="0.6"/></svg>
+        </div>
+        <div>
+          <h3>Noční obloha</h3>
+          <p>Za každý uzavřený den se rozsvítí hvězda v barvě nálady, se kterou jsi den zavřel(a). Když je týden v rytmu, hvězdy se spojí do souhvězdí — každý z 53 týdnů v roce má to své, od Hrnku čaje v lednu po Jedličku v prosinci, a každý rok se vrací.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="num">
+          <svg class="step-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3c-3 4-6 6-6 10a6 6 0 0 0 12 0c0-4-3-6-6-10z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+        </div>
+        <div>
+          <h3>Tichá sbírka, ne výkonnostní tabulka</h3>
+          <p>Nic se z ní neztratí. Vynechaný den nic nezhasne, jeden slabší týden rytmus nepřeruší a postup zůstane i po smazání historie.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section id="screens">
     <h2>Jak to vypadá</h2>
     <div class="screens">
-      <button type="button" class="screen-thumb" data-full="01@2x.webp" aria-label="Zvětšit screenshot: přehled denního rituálu">
-        <img loading="lazy" decoding="async" width="191" height="340" src="01.webp" srcset="01.webp 1x, 01@2x.webp 2x" alt="ClockOut — přehled denního rituálu">
+      <button type="button" class="screen-thumb" data-full="01@2x.webp" aria-label="Zvětšit screenshot: domovská obrazovka s dnešní otázkou a týdnem">
+        <img loading="lazy" decoding="async" width="191" height="340" src="01.webp" srcset="01.webp 1x, 01@2x.webp 2x" alt="Padla — domovská obrazovka s dnešní otázkou a týdnem">
       </button>
-      <button type="button" class="screen-thumb" data-full="02@2x.webp" aria-label="Zvětšit screenshot: krok Odlož myšlenky">
-        <img loading="lazy" decoding="async" width="191" height="340" src="02.webp" srcset="02.webp 1x, 02@2x.webp 2x" alt="ClockOut — krok Odlož myšlenky">
+      <button type="button" class="screen-thumb" data-full="02@2x.webp" aria-label="Zvětšit screenshot: noční obloha se souhvězdími měsíce">
+        <img loading="lazy" decoding="async" width="191" height="340" src="02.webp" srcset="02.webp 1x, 02@2x.webp 2x" alt="Padla — noční obloha se souhvězdími měsíce">
       </button>
-      <button type="button" class="screen-thumb" data-full="03@2x.webp" aria-label="Zvětšit screenshot: krok Dýchání">
-        <img loading="lazy" decoding="async" width="191" height="340" src="03.webp" srcset="03.webp 1x, 03@2x.webp 2x" alt="ClockOut — krok Dýchání">
+      <button type="button" class="screen-thumb" data-full="03@2x.webp" aria-label="Zvětšit screenshot: cesta domů, deset stupňů cesty z kanceláře">
+        <img loading="lazy" decoding="async" width="191" height="340" src="03.webp" srcset="03.webp 1x, 03@2x.webp 2x" alt="Padla — cesta domů, deset stupňů cesty z kanceláře">
       </button>
-      <button type="button" class="screen-thumb" data-full="04@2x.webp" aria-label="Zvětšit screenshot: krok Zhasnutí lampy">
-        <img loading="lazy" decoding="async" width="191" height="340" src="04.webp" srcset="04.webp 1x, 04@2x.webp 2x" alt="ClockOut — krok Zhasnutí lampy">
+      <button type="button" class="screen-thumb" data-full="04@2x.webp" aria-label="Zvětšit screenshot: krok Odlož myšlenky">
+        <img loading="lazy" decoding="async" width="191" height="340" src="04.webp" srcset="04.webp 1x, 04@2x.webp 2x" alt="Padla — krok Odlož myšlenky">
       </button>
-      <button type="button" class="screen-thumb" data-full="05@2x.webp" aria-label="Zvětšit screenshot: krok Zápis nálady">
-        <img loading="lazy" decoding="async" width="191" height="340" src="05.webp" srcset="05.webp 1x, 05@2x.webp 2x" alt="ClockOut — krok Zápis nálady">
+      <button type="button" class="screen-thumb" data-full="05@2x.webp" aria-label="Zvětšit screenshot: krok Dýchání">
+        <img loading="lazy" decoding="async" width="191" height="340" src="05.webp" srcset="05.webp 1x, 05@2x.webp 2x" alt="Padla — krok Dýchání">
       </button>
-      <button type="button" class="screen-thumb" data-full="06@2x.webp" aria-label="Zvětšit screenshot: přehled historie rituálů">
-        <img loading="lazy" decoding="async" width="191" height="340" src="06.webp" srcset="06.webp 1x, 06@2x.webp 2x" alt="ClockOut — přehled historie rituálů">
+      <button type="button" class="screen-thumb" data-full="06@2x.webp" aria-label="Zvětšit screenshot: krok Zhasnutí lampy">
+        <img loading="lazy" decoding="async" width="191" height="340" src="06.webp" srcset="06.webp 1x, 06@2x.webp 2x" alt="Padla — krok Zhasnutí lampy">
+      </button>
+      <button type="button" class="screen-thumb" data-full="07@2x.webp" aria-label="Zvětšit screenshot: krok Zápis nálady">
+        <img loading="lazy" decoding="async" width="191" height="340" src="07.webp" srcset="07.webp 1x, 07@2x.webp 2x" alt="Padla — krok Zápis nálady">
+      </button>
+      <button type="button" class="screen-thumb" data-full="08@2x.webp" aria-label="Zvětšit screenshot: historie nálad, odpovědí a noční obloha">
+        <img loading="lazy" decoding="async" width="191" height="340" src="08.webp" srcset="08.webp 1x, 08@2x.webp 2x" alt="Padla — historie nálad, odpovědí a noční obloha">
       </button>
     </div>
   </section>
@@ -617,19 +685,22 @@
       <div>
         <h2>Co je uvnitř</h2>
         <ul class="checklist">
-          <li>Denní připomínka na konci pracovní doby s rychlým nastavením času</li>
+          <li>Denní připomínka na konci pracovní doby — rychlé předvolby, nebo vlastní čas</li>
           <li>Jen všední dny, nebo každý den — podle tebe</li>
-          <li>Série a historie bez tlaku žebříčků</li>
-          <li>Čtyři ambientní zvuky: tibetská mísa, déšť, oceán, nebo ticho s vibracemi</li>
+          <li>Cesta domů s týdenním rytmem a noční obloha s 53 souhvězdími</li>
+          <li>Historie nálad a odpovědí bez tlaku žebříčků</li>
+          <li>Čtyři animace dýchání a čtyři ambientní zvuky: tibetská mísa, déšť, oceán, nebo ticho s vibracemi</li>
           <li>Nahraj si vlastní MP3, WAV, OGG, M4A nebo FLAC, který se bude během rituálu opakovat</li>
+          <li>Flexibilní pracovní doba — rituál lze povolit kdykoliv, nejen mezi 16:00 a 21:00</li>
           <li>Angličtina a čeština, přepínatelné v appce</li>
-          <li>Design Material 3 s klidným tmavým motivem</li>
+          <li>Design Material 3 s klidným tmavým motivem a displejem, který během rituálu nezhasne</li>
         </ul>
       </div>
       <div class="privacy">
         <h2>Soukromé od základu</h2>
-        <p><strong>Všechno zůstává v tvém telefonu.</strong> Poznámky, nálady i historie žijí v lokální databázi — žádný účet, žádná cloudová synchronizace, žádné reklamy.</p>
-        <p>Nic z toho, co napíšeš, se nikam neodesílá. Kdykoliv to jedním ťuknutím v Nastavení smažeš.</p>
+        <p><strong>Všechno zůstává v tvém telefonu.</strong> Poznámky, nálady, historie i noční obloha žijí v lokální databázi — žádný účet, žádná cloudová synchronizace, žádné reklamy.</p>
+        <p>Nic z toho, co napíšeš, se nikam neodesílá. Historii kdykoliv jedním ťuknutím v Nastavení smažeš; cesta a obloha si pamatují jen data uzavřených dní.</p>
+        <p>Anonymní diagnostika pro opravu chyb je volitelná a bez tvého souhlasu zůstává vypnutá.</p>
       </div>
     </div>
   </section>
