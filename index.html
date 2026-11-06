@@ -584,6 +584,9 @@
   }
   .promo-link:hover{ filter:brightness(1.07); transform:translateY(-1px); }
   .promo-link:focus-visible{ outline:2px solid var(--ink); outline-offset:3px; }
+  .promo-actions{ display:flex; flex-wrap:wrap; align-items:center; gap:12px 20px; }
+  .promo-more{ font-size:14px; color:var(--muted); text-decoration:none; border-bottom:1px solid var(--line); }
+  .promo-more:hover{ color:var(--ink); border-color:var(--muted); }
   @media (max-width:520px){
     .promo-card{ grid-template-columns:1fr; padding:22px; }
     .promo-card img{ width:52px; height:52px; border-radius:13px; }
@@ -754,7 +757,10 @@
         <p class="promo-eyebrow">Also by Ondřej Růžička</p>
         <h2 id="more-title">Luxel: Daily Light Puzzle</h2>
         <p class="pitch">Once the laptop is closed, one small puzzle a day. Tap the lights to reveal today's shape in as few moves as you can, right on your home screen. Calm, offline, no account.</p>
-        <a class="promo-link" href="https://ruzickaond.github.io/luxel-web/?utm_source=clockout-web&amp;utm_medium=cross_promo">Try Luxel</a>
+        <div class="promo-actions">
+          <a class="promo-link" href="https://play.google.com/store/apps/details?id=app.luxel&amp;referrer=utm_source%3Dclockout-web%26utm_medium%3Dcross_promo">Try Luxel on Google Play</a>
+          <a class="promo-more" href="https://ruzickaond.github.io/luxel-web/">About Luxel</a>
+        </div>
       </div>
     </div>
   </section>

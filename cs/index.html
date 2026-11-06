@@ -583,6 +583,9 @@
   }
   .promo-link:hover{ filter:brightness(1.07); transform:translateY(-1px); }
   .promo-link:focus-visible{ outline:2px solid var(--ink); outline-offset:3px; }
+  .promo-actions{ display:flex; flex-wrap:wrap; align-items:center; gap:12px 20px; }
+  .promo-more{ font-size:14px; color:var(--muted); text-decoration:none; border-bottom:1px solid var(--line); }
+  .promo-more:hover{ color:var(--ink); border-color:var(--muted); }
   @media (max-width:520px){
     .promo-card{ grid-template-columns:1fr; padding:22px; }
     .promo-card img{ width:52px; height:52px; border-radius:13px; }
@@ -753,7 +756,10 @@
         <p class="promo-eyebrow">Od stejného autora</p>
         <h2 id="more-title">Luxel: denní hádanka ze světel</h2>
         <p class="pitch">Až zaklapneš notebook, jedna malá hádanka denně. Ťukáním na světla rozsviť dnešní tvar na co nejméně tahů, přímo na ploše telefonu. Klidně, offline a bez účtu.</p>
-        <a class="promo-link" href="https://ruzickaond.github.io/luxel-web/cs/?utm_source=clockout-web&amp;utm_medium=cross_promo">Vyzkoušej Luxel</a>
+        <div class="promo-actions">
+          <a class="promo-link" href="https://play.google.com/store/apps/details?id=app.luxel&amp;hl=cs&amp;referrer=utm_source%3Dclockout-web%26utm_medium%3Dcross_promo">Vyzkoušej Luxel na Google Play</a>
+          <a class="promo-more" href="https://ruzickaond.github.io/luxel-web/cs/">O aplikaci Luxel</a>
+        </div>
       </div>
     </div>
   </section>
