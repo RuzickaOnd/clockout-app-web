@@ -546,6 +546,47 @@
   }
 
   .to-top:hover{ filter:brightness(1.08); }
+
+  /* ---------- Cross-promo ---------- */
+  .promo-card{
+    display:grid;
+    grid-template-columns:64px 1fr;
+    gap:22px;
+    align-items:start;
+    background:var(--bg-alt);
+    border:1px solid var(--line);
+    border-radius:20px;
+    padding:28px;
+  }
+  .promo-card img{ width:64px; height:64px; border-radius:16px; display:block; }
+  .promo-eyebrow{
+    margin:0 0 6px;
+    font-size:12px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--muted-dim);
+  }
+  #more h2{ margin:0 0 10px; max-width:none; }
+  .promo-card p.pitch{ margin:0 0 20px; color:var(--muted); font-size:15px; max-width:52ch; }
+  .promo-link{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:12px 22px;
+    border-radius:999px;
+    background:var(--lamp);
+    color:var(--bg);
+    font-weight:600;
+    font-size:15px;
+    text-decoration:none;
+    transition:filter 0.2s ease, transform 0.2s ease;
+  }
+  .promo-link:hover{ filter:brightness(1.07); transform:translateY(-1px); }
+  .promo-link:focus-visible{ outline:2px solid var(--ink); outline-offset:3px; }
+  @media (max-width:520px){
+    .promo-card{ grid-template-columns:1fr; padding:22px; }
+    .promo-card img{ width:52px; height:52px; border-radius:13px; }
+  }
 </style>
 </head>
 <body>
@@ -701,6 +742,18 @@
         <p><strong>Všechno zůstává v tvém telefonu.</strong> Poznámky, nálady, historie i noční obloha žijí v lokální databázi — žádný účet, žádná cloudová synchronizace, žádné reklamy.</p>
         <p>Nic z toho, co napíšeš, se nikam neodesílá. Historii kdykoliv jedním ťuknutím v Nastavení smažeš; cesta a obloha si pamatují jen data uzavřených dní.</p>
         <p>Anonymní diagnostika pro opravu chyb je volitelná a bez tvého souhlasu zůstává vypnutá.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="more" aria-labelledby="more-title">
+    <div class="promo-card">
+      <img src="https://ruzickaond.github.io/luxel-web/icon-192.png" width="64" height="64" alt="" loading="lazy">
+      <div>
+        <p class="promo-eyebrow">Od stejného autora</p>
+        <h2 id="more-title">Luxel: denní hádanka ze světel</h2>
+        <p class="pitch">Až zaklapneš notebook, jedna malá hádanka denně. Ťukáním na světla rozsviť dnešní tvar na co nejméně tahů, přímo na ploše telefonu. Klidně, offline a bez účtu.</p>
+        <a class="promo-link" href="https://ruzickaond.github.io/luxel-web/cs/?utm_source=clockout-web&amp;utm_medium=cross_promo">Vyzkoušej Luxel</a>
       </div>
     </div>
   </section>

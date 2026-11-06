@@ -547,6 +547,47 @@
   }
 
   .to-top:hover{ filter:brightness(1.08); }
+
+  /* ---------- Cross-promo ---------- */
+  .promo-card{
+    display:grid;
+    grid-template-columns:64px 1fr;
+    gap:22px;
+    align-items:start;
+    background:var(--bg-alt);
+    border:1px solid var(--line);
+    border-radius:20px;
+    padding:28px;
+  }
+  .promo-card img{ width:64px; height:64px; border-radius:16px; display:block; }
+  .promo-eyebrow{
+    margin:0 0 6px;
+    font-size:12px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--muted-dim);
+  }
+  #more h2{ margin:0 0 10px; max-width:none; }
+  .promo-card p.pitch{ margin:0 0 20px; color:var(--muted); font-size:15px; max-width:52ch; }
+  .promo-link{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:12px 22px;
+    border-radius:999px;
+    background:var(--lamp);
+    color:var(--bg);
+    font-weight:600;
+    font-size:15px;
+    text-decoration:none;
+    transition:filter 0.2s ease, transform 0.2s ease;
+  }
+  .promo-link:hover{ filter:brightness(1.07); transform:translateY(-1px); }
+  .promo-link:focus-visible{ outline:2px solid var(--ink); outline-offset:3px; }
+  @media (max-width:520px){
+    .promo-card{ grid-template-columns:1fr; padding:22px; }
+    .promo-card img{ width:52px; height:52px; border-radius:13px; }
+  }
 </style>
 </head>
 <body>
@@ -702,6 +743,18 @@
         <p><strong>Everything stays on your phone.</strong> Notes, moods, history and your night sky live in a local database — no account, no cloud sync, no ads.</p>
         <p>Nothing you write is ever uploaded. Clear your history with one tap in Settings, any time; the path and the sky keep only the dates of the days you closed.</p>
         <p>Anonymous diagnostics that help fix bugs are optional and stay off unless you allow them.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="more" aria-labelledby="more-title">
+    <div class="promo-card">
+      <img src="https://ruzickaond.github.io/luxel-web/icon-192.png" width="64" height="64" alt="" loading="lazy">
+      <div>
+        <p class="promo-eyebrow">Also by Ondřej Růžička</p>
+        <h2 id="more-title">Luxel: Daily Light Puzzle</h2>
+        <p class="pitch">Once the laptop is closed, one small puzzle a day. Tap the lights to reveal today's shape in as few moves as you can, right on your home screen. Calm, offline, no account.</p>
+        <a class="promo-link" href="https://ruzickaond.github.io/luxel-web/?utm_source=clockout-web&amp;utm_medium=cross_promo">Try Luxel</a>
       </div>
     </div>
   </section>
